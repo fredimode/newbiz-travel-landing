@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# New Biz Travel — Landing
 
-## Getting Started
+Landing de transicion para New Biz Travel mientras se desarrolla la web definitiva.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js 16 + TypeScript + Tailwind CSS
+- Nodemailer + SMTP Gmail para envio de consultas
+- Deploy en Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. `npm install`
+2. `cp .env.example .env.local` y completar:
+   - `SMTP_USER`, `SMTP_PASS` (App Password de Google Workspace)
+   - `EMAIL_TO` (destinatario de consultas)
+   - `NEXT_PUBLIC_SITE_URL`
+3. `npm run dev`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estructura
 
-## Learn More
+- `src/app/` — paginas (home, /privacidad, /terminos, /cookies, /gracias)
+- `src/components/` — Navbar, Hero, DestinoCard, ConsultaModal, Footer, etc.
+- `src/lib/destinos.ts` — catalogo de 6 destinos (editable)
+- `src/lib/tipos-viaje.ts` — 4 tipos de viaje (editable)
+- `src/lib/send-email.ts` — wrapper de nodemailer (server-only)
+- `src/app/api/consultas/route.ts` — endpoint del formulario
 
-To learn more about Next.js, take a look at the following resources:
+## Email setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Esta landing manda consultas a traves de Nodemailer + SMTP Gmail.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Necesitas:
+1. Una cuenta de Google Workspace con 2FA activado (tipicamente info@)
+2. Generar una App Password en myaccount.google.com/apppasswords
+3. Configurar las env vars:
+   - `SMTP_USER`: la cuenta de email
+   - `SMTP_PASS`: la App Password de 16 chars
+   - `EMAIL_TO`: donde llegan las consultas (puede ser la misma cuenta)
 
-## Deploy on Vercel
+En desarrollo local: copia `.env.example` a `.env.local` y completalo.
+En produccion: configurar en Vercel > Settings > Environment Variables.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Paginas legales (`/privacidad`, `/terminos`, `/cookies`) son indexables
+- Resto del sitio tiene `noindex` (es transitoria para compliance Stripe)
+- Imagenes de destinos en `public/destinos/`
+- CUIT 30-71173463-1 y Legajo EVyT 14764 visibles en footer (requerido por ley)
+
+## Migrar a la web real
+
+Cuando se reemplace por la web definitiva:
+1. Cambiar DNS para apuntar al proyecto real
+2. Las consultas del historico se pueden buscar en info@newbiztravel.com.ar
+3. La pagina `/gracias` tiene url params, mantener compatibilidad si se quiere preservar links historicos
