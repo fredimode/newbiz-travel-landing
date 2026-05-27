@@ -1,8 +1,9 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Send, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { buildMailtoUrl } from "@/lib/email";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -14,6 +15,54 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function ContactoFinal() {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const fd = new FormData(e.currentTarget);
+
+    const payload = {
+      nombre: fd.get("name") as string,
+      email: fd.get("email") as string,
+      telefono: fd.get("phone") as string,
+      mensaje: (fd.get("message") as string) || undefined,
+      source: "contacto_final" as const,
+      acepta_politicas: true,
+    };
+
+    try {
+      const res = await fetch("/api/consultas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: "Error inesperado" }));
+        throw new Error(err.error || "No pudimos enviar tu consulta");
+      }
+
+      const result = await res.json();
+
+      const params = new URLSearchParams();
+      params.set("ref", result.ref);
+      params.set("nombre", payload.nombre);
+
+      router.push(`/gracias?${params.toString()}`);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Error inesperado"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <section className="bg-dark py-24 text-white max-lg:py-16 max-sm:py-12" id="contacto">
       <div className="mx-auto max-w-[1200px] px-6">
@@ -30,17 +79,7 @@ export default function ContactoFinal() {
 
         <form
           className="mx-auto max-w-[760px] rounded-md border border-white/12 bg-white/[0.04] p-10 max-sm:p-6"
-          onSubmit={(e) => {
-            e.preventDefault();
-            const fd = new FormData(e.currentTarget);
-            const url = buildMailtoUrl({
-              nombre: fd.get("name") as string,
-              email: fd.get("email") as string,
-              telefono: fd.get("phone") as string,
-              mensaje: fd.get("message") as string,
-            });
-            window.location.href = url;
-          }}
+          onSubmit={handleSubmit}
           noValidate
         >
           <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -80,6 +119,7 @@ export default function ContactoFinal() {
                 id="cf-phone"
                 name="phone"
                 placeholder="+54 11 ..."
+                required
               />
             </div>
           </div>
@@ -116,18 +156,26 @@ export default function ContactoFinal() {
             </label>
           </div>
 
+          {submitError && (
+            <div className="mb-4 rounded-md border border-red/20 bg-red/5 px-4 py-3 text-sm text-red">
+              {submitError}. Probá de nuevo o escribinos por WhatsApp.
+            </div>
+          )}
+
           <div className="flex justify-center">
             <button
               type="submit"
-              className="inline-flex items-center justify-center gap-2 rounded-sm bg-amber px-7 py-3.5 text-lg font-bold text-dark shadow-amber transition-all hover:brightness-105"
+              disabled={isSubmitting}
+              className="inline-flex items-center justify-center gap-2 rounded-sm bg-amber px-7 py-3.5 text-lg font-bold text-dark shadow-amber transition-all hover:brightness-105 disabled:opacity-60"
             >
-              <Send size={18} />
-              Enviar consulta
+              {isSubmitting ? (
+                <Loader2 size={18} className="animate-spin" />
+              ) : (
+                <Send size={18} />
+              )}
+              {isSubmitting ? "Enviando..." : "Enviar consulta"}
             </button>
           </div>
-          <p className="mt-2 text-center text-xs text-white/45">
-            Al enviar se abrirá tu cliente de email con la consulta pre-armada
-          </p>
 
           <div className="my-8 flex items-center gap-4 text-sm text-white/55">
             <div className="h-px flex-1 bg-white/[0.18]" />
