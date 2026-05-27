@@ -1,17 +1,3 @@
-/**
- * TODO: reemplazar imageUrl placeholders por imágenes reales.
- * El usuario va a subir 6 fotos a public/destinos/:
- *   - public/destinos/cancun.jpg
- *   - public/destinos/rio.jpg
- *   - public/destinos/punta-cana.jpg
- *   - public/destinos/madrid.jpg
- *   - public/destinos/orlando.jpg
- *   - public/destinos/bariloche.jpg
- *
- * Cuando estén, cambiar imageUrl de cada destino a:
- *   '/destinos/cancun.jpg', '/destinos/rio.jpg', etc.
- */
-
 export type Destino = {
   id: string;
   nombre: string;
