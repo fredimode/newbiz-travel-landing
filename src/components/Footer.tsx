@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -132,8 +133,9 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-between gap-3 text-[13px] text-white/55 max-sm:justify-center max-sm:text-center">
             <span>© 2026 New Biz Travel. Todos los derechos reservados.</span>
             <div className="flex gap-5">
-              <a href="#" className="hover:text-white/80">Política de privacidad</a>
-              <a href="#" className="hover:text-white/80">Términos y condiciones</a>
+              <Link href="/privacidad" className="hover:text-white/80">Política de privacidad</Link>
+              <Link href="/terminos" className="hover:text-white/80">Términos y condiciones</Link>
+              <Link href="/cookies" className="hover:text-white/80">Cookies</Link>
             </div>
           </div>
           <div className="mt-3 text-xs text-white/45">
