@@ -126,7 +126,8 @@ function buildHtmlEmail(data: ConsultaData, ref: string): string {
        <p style="color:#1c1917;line-height:1.6;font-size:14px;margin:12px 0 0;padding:12px;background-color:#fafaf9;border-left:3px solid #0d9488;border-radius:4px">${escapeHtml(data.mensaje).replace(/\n/g, "<br>")}</p>`
     : "";
 
-  return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background-color:#ffffff">
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background-color:#ffffff">
   <div style="background-color:#0d9488;padding:30px 20px;text-align:center">
     <h1 style="color:#ffffff;margin:0;font-size:22px">Nueva consulta desde la web</h1>
     <p style="color:#d1fae5;margin:8px 0 0;font-size:13px">${ref}</p>
@@ -163,7 +164,8 @@ function buildHtmlEmail(data: ConsultaData, ref: string): string {
       <p style="margin:4px 0">Origen: ${escapeHtml(SOURCE_LABELS[data.source])} · ID: ${ref}</p>
     </div>
   </div>
-</div>`;
+</div>
+</body></html>`;
 }
 
 export async function POST(request: Request) {

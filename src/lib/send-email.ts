@@ -36,12 +36,16 @@ export async function sendEmail(
   const transporter = getTransporter();
 
   const result = await transporter.sendMail({
-    from: `${options.fromName || "New Biz Travel"} <${process.env.SMTP_USER}>`,
+    from: {
+      name: options.fromName || "New Biz Travel",
+      address: process.env.SMTP_USER,
+    },
     to: options.to,
     subject: options.subject,
     html: options.html,
     text: options.text,
     replyTo: options.replyTo,
+    encoding: "utf-8",
   });
 
   return { messageId: result.messageId };
