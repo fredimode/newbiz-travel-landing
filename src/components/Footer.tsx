@@ -35,9 +35,15 @@ export default function Footer() {
         <div className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.2fr_1.3fr] lg:gap-12">
           {/* Brand */}
           <div>
-            <span className="mb-3.5 flex items-center gap-2.5 font-heading text-[22px] text-white">
-              <Image src="/logo.png" alt="New Biz Travel" width={36} height={36} />
-              New Biz Travel
+            <span className="mb-3.5 flex items-center gap-2">
+              <Image src="/logo.png" alt="" width={40} height={40} />
+              <Image
+                src="/blanco.png"
+                alt="New Biz Travel"
+                width={160}
+                height={36}
+                className="object-contain"
+              />
             </span>
             <p className="mb-4.5 max-w-[280px] text-sm leading-relaxed">
               Agencia de viajes con sede en Buenos Aires. Diseñamos experiencias

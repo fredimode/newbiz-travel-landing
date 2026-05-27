@@ -79,7 +79,7 @@ export default function Hero() {
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-around gap-6 px-6 py-[22px] max-sm:flex-col max-sm:items-start max-sm:gap-4">
           <div className="flex items-center gap-3 text-[15px] text-white">
             <Users size={22} className="text-[#fde68a]" />
-            <span><strong className="font-semibold">+500</strong> viajeros felices</span>
+            <span><strong className="font-semibold">+5.000</strong> viajeros felices</span>
           </div>
           <div className="flex items-center gap-3 text-[15px] text-white">
             <Award size={22} className="text-[#fde68a]" />
