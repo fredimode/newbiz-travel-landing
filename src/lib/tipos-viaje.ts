@@ -3,6 +3,7 @@ export type TipoViaje = {
   nombre: string;
   descripcion: string;
   icon: "heart" | "home" | "trophy" | "users";
+  imageUrl: string;
 };
 
 export const tiposViaje: TipoViaje[] = [
@@ -12,6 +13,7 @@ export const tiposViaje: TipoViaje[] = [
     descripcion:
       "Una experiencia única para celebrar el amor en destinos soñados.",
     icon: "heart",
+    imageUrl: "/tipos/luna-miel.jpg",
   },
   {
     id: "familia",
@@ -19,6 +21,7 @@ export const tiposViaje: TipoViaje[] = [
     descripcion:
       "Diversión asegurada para todas las edades, con hoteles family-friendly.",
     icon: "home",
+    imageUrl: "/tipos/familia.jpg",
   },
   {
     id: "evento",
@@ -26,6 +29,7 @@ export const tiposViaje: TipoViaje[] = [
     descripcion:
       "Vivilo desde adentro. Paquetes con entradas, hotel y vuelos.",
     icon: "trophy",
+    imageUrl: "/tipos/evento.jpg",
   },
   {
     id: "grupo",
@@ -33,5 +37,6 @@ export const tiposViaje: TipoViaje[] = [
     descripcion:
       "Quinceañeras, despedidas, viajes con amigos. Precios especiales para grupos.",
     icon: "users",
+    imageUrl: "/tipos/grupo.jpg",
   },
 ];
