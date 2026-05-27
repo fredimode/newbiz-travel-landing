@@ -86,10 +86,10 @@ export default function Footer() {
               Navegación
             </h4>
             <ul className="flex flex-col gap-2.5">
-              <li><a href="#destinos" className="text-sm transition-colors hover:text-white">Destinos</a></li>
-              <li><a href="#tipos" className="text-sm transition-colors hover:text-white">Tipos de viaje</a></li>
-              <li><a href="#nosotros" className="text-sm transition-colors hover:text-white">Nosotros</a></li>
-              <li><a href="#contacto" className="text-sm transition-colors hover:text-white">Contacto</a></li>
+              <li><a href="/#destinos" className="text-sm transition-colors hover:text-white">Destinos</a></li>
+              <li><a href="/#tipos" className="text-sm transition-colors hover:text-white">Tipos de viaje</a></li>
+              <li><a href="/#nosotros" className="text-sm transition-colors hover:text-white">Nosotros</a></li>
+              <li><a href="/#contacto" className="text-sm transition-colors hover:text-white">Contacto</a></li>
             </ul>
           </div>
 

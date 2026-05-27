@@ -8,10 +8,10 @@ const WA_URL =
   "https://wa.me/5491140853640?text=Hola!%20Me%20gustar%C3%ADa%20consultar%20sobre%20un%20viaje.";
 
 const NAV_LINKS = [
-  { label: "Destinos", href: "#destinos" },
-  { label: "Tipos de viaje", href: "#tipos" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Destinos", href: "/#destinos" },
+  { label: "Tipos de viaje", href: "/#tipos" },
+  { label: "Nosotros", href: "/#nosotros" },
+  { label: "Contacto", href: "/#contacto" },
 ];
 
 function WhatsAppIcon({ className }: { className?: string }) {
