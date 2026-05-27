@@ -1,9 +1,9 @@
 "use client";
 
 import { Send } from "lucide-react";
-
-const WA_URL =
-  "https://wa.me/5491140853640?text=Hola!%20Quiero%20info%20sobre%20viajes.";
+import Link from "next/link";
+import { buildMailtoUrl } from "@/lib/email";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -32,7 +32,14 @@ export default function ContactoFinal() {
           className="mx-auto max-w-[760px] rounded-md border border-white/12 bg-white/[0.04] p-10 max-sm:p-6"
           onSubmit={(e) => {
             e.preventDefault();
-            /* TODO: wire to /api/consultas */
+            const fd = new FormData(e.currentTarget);
+            const url = buildMailtoUrl({
+              nombre: fd.get("name") as string,
+              email: fd.get("email") as string,
+              telefono: fd.get("phone") as string,
+              mensaje: fd.get("message") as string,
+            });
+            window.location.href = url;
           }}
           noValidate
         >
@@ -89,7 +96,27 @@ export default function ContactoFinal() {
             />
           </div>
 
-          <div className="mt-2 flex justify-center">
+          <div className="mb-4 flex items-start gap-2">
+            <input
+              type="checkbox"
+              id="cf-privacy"
+              name="acepta_privacidad"
+              required
+              className="mt-1 h-4 w-4 shrink-0 accent-teal"
+            />
+            <label htmlFor="cf-privacy" className="text-sm text-white/75">
+              Acepto la{" "}
+              <Link href="/privacidad" target="_blank" className="text-[#5eead4] hover:underline">
+                Política de Privacidad
+              </Link>{" "}
+              y los{" "}
+              <Link href="/terminos" target="_blank" className="text-[#5eead4] hover:underline">
+                Términos y Condiciones
+              </Link>
+            </label>
+          </div>
+
+          <div className="flex justify-center">
             <button
               type="submit"
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-amber px-7 py-3.5 text-lg font-bold text-dark shadow-amber transition-all hover:brightness-105"
@@ -98,6 +125,9 @@ export default function ContactoFinal() {
               Enviar consulta
             </button>
           </div>
+          <p className="mt-2 text-center text-xs text-white/45">
+            Al enviar se abrirá tu cliente de email con la consulta pre-armada
+          </p>
 
           <div className="my-8 flex items-center gap-4 text-sm text-white/55">
             <div className="h-px flex-1 bg-white/[0.18]" />
@@ -108,7 +138,7 @@ export default function ContactoFinal() {
           <div className="text-center">
             <a
               className="inline-flex items-center justify-center gap-2 rounded-sm bg-wa px-7 py-3.5 text-lg font-semibold text-white transition-all hover:brightness-105"
-              href={WA_URL}
+              href={buildWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
             >

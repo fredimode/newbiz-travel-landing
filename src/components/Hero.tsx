@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { Send, Users, Award, Headphones } from "lucide-react";
-
-const WA_URL =
-  "https://wa.me/5491140853640?text=Hola!%20Quiero%20info%20sobre%20viajes.";
+import { useModal } from "./ModalContext";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -15,6 +14,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export default function Hero() {
+  const { openModal } = useModal();
+
   return (
     <header className="relative flex min-h-[80vh] flex-col justify-center overflow-hidden text-white max-sm:min-h-[auto]">
       {/* Background image */}
@@ -55,9 +56,7 @@ export default function Hero() {
         <div className="flex flex-wrap justify-center gap-4 max-sm:mx-auto max-sm:max-w-[320px] max-sm:flex-col">
           <button
             className="inline-flex items-center justify-center gap-2 rounded-sm bg-amber px-7 py-3.5 text-lg font-bold text-dark shadow-amber transition-all hover:brightness-105"
-            onClick={() => {
-              /* TODO: open ConsultaModal */
-            }}
+            onClick={() => openModal()}
           >
             <Send size={18} />
             Contar mi viaje
@@ -65,7 +64,7 @@ export default function Hero() {
 
           <a
             className="inline-flex items-center justify-center gap-2 rounded-sm border border-white/60 bg-white/10 px-4 py-3.5 text-base font-semibold text-white backdrop-blur-[4px] transition-all hover:border-white hover:bg-white/[0.18] max-sm:w-full"
-            href={WA_URL}
+            href={buildWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -2,6 +2,7 @@
 
 import { Heart, Home, Trophy, Users, ArrowRight } from "lucide-react";
 import type { TipoViaje } from "@/lib/tipos-viaje";
+import { useModal } from "./ModalContext";
 
 const ICON_MAP = {
   heart: Heart,
@@ -11,6 +12,7 @@ const ICON_MAP = {
 } as const;
 
 export default function TipoCard({ tipo }: { tipo: TipoViaje }) {
+  const { openModal } = useModal();
   const Icon = ICON_MAP[tipo.icon];
 
   return (
@@ -22,9 +24,7 @@ export default function TipoCard({ tipo }: { tipo: TipoViaje }) {
       <p className="flex-1 text-[15px] text-medium">{tipo.descripcion}</p>
       <button
         className="inline-flex items-center gap-1 py-1.5 text-sm font-semibold text-teal transition-all hover:gap-2 hover:text-teal-dark"
-        onClick={() => {
-          /* TODO: open ConsultaModal with tipo */
-        }}
+        onClick={() => openModal({ tipoViaje: tipo.id })}
       >
         Quiero saber más <ArrowRight size={14} />
       </button>

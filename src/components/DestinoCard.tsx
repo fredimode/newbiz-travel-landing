@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { Destino } from "@/lib/destinos";
+import { useModal } from "./ModalContext";
 
 const BADGE_STYLES = {
   mas_vendido: "bg-teal text-white",
@@ -15,6 +16,8 @@ const BADGE_LABELS = {
 } as const;
 
 export default function DestinoCard({ destino }: { destino: Destino }) {
+  const { openModal } = useModal();
+
   return (
     <article className="group flex flex-col overflow-hidden rounded-md border border-separator bg-white shadow-card transition-all duration-250 hover:-translate-y-1 hover:border-transparent hover:shadow-card-hover">
       <div className="relative aspect-[4/3] overflow-hidden bg-separator">
@@ -49,9 +52,7 @@ export default function DestinoCard({ destino }: { destino: Destino }) {
 
         <button
           className="mt-3.5 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-teal px-4 py-2.5 text-base font-semibold text-white transition-colors hover:bg-teal-dark"
-          onClick={() => {
-            /* TODO: open ConsultaModal with destino */
-          }}
+          onClick={() => openModal({ destino: destino.nombre })}
         >
           Consultar disponibilidad
           <ArrowRight size={18} />

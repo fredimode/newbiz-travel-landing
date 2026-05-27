@@ -6,10 +6,12 @@ import ComoTrabajamos from "@/components/ComoTrabajamos";
 import PorQueElegirnos from "@/components/PorQueElegirnos";
 import ContactoFinal from "@/components/ContactoFinal";
 import Footer from "@/components/Footer";
+import { ModalProvider } from "@/components/ModalContext";
+import ConsultaModal from "@/components/ConsultaModal";
 
 export default function Home() {
   return (
-    <>
+    <ModalProvider>
       <Navbar />
       <main>
         <Hero />
@@ -20,6 +22,7 @@ export default function Home() {
         <ContactoFinal />
       </main>
       <Footer />
-    </>
+      <ConsultaModal />
+    </ModalProvider>
   );
 }
