@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { X, Send, MapPin, Sparkles } from "lucide-react";
+import { X, Send, MapPin, Sparkles, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useModal } from "./ModalContext";
-import { buildMailtoUrl } from "@/lib/email";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const TIPO_LABELS: Record<string, string> = {
@@ -27,6 +26,8 @@ export default function ConsultaModal() {
   const { isOpen, preset, closeModal } = useModal();
   const router = useRouter();
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -36,36 +37,70 @@ export default function ConsultaModal() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isOpen, closeModal]);
 
+  useEffect(() => {
+    if (isOpen) {
+      setSubmitError(null);
+      setIsSubmitting(false);
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+
     const fd = new FormData(e.currentTarget);
 
-    const mailtoUrl = buildMailtoUrl({
+    const payload = {
       nombre: fd.get("nombre") as string,
       email: fd.get("email") as string,
       telefono: fd.get("telefono") as string,
-      destino: (fd.get("destino_interes") as string) || preset?.destino,
-      tipoViaje: preset?.tipoViaje,
-      cantidad: fd.get("cantidad_personas") as string,
-      fechaInicio: fd.get("fecha_aprox_inicio") as string,
-      fechaFin: fd.get("fecha_aprox_fin") as string,
-      presupuesto: fd.get("presupuesto_aprox") as string,
-      mensaje: fd.get("mensaje") as string,
-    });
+      destino: (fd.get("destino_interes") as string) || preset?.destino || undefined,
+      tipoViaje: preset?.tipoViaje || undefined,
+      cantidad: fd.get("cantidad_personas") as string || undefined,
+      fechaInicio: fd.get("fecha_aprox_inicio") as string || undefined,
+      fechaFin: fd.get("fecha_aprox_fin") as string || undefined,
+      presupuesto: fd.get("presupuesto_aprox") as string || undefined,
+      mensaje: fd.get("mensaje") as string || undefined,
+      source: preset?.destino
+        ? "destino_card"
+        : preset?.tipoViaje
+          ? "tipo_viaje_card"
+          : "hero",
+      acepta_politicas: true,
+    };
 
-    window.location.href = mailtoUrl;
+    try {
+      const res = await fetch("/api/consultas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    const params = new URLSearchParams();
-    params.set("nombre", fd.get("nombre") as string);
-    if (preset?.destino) params.set("destino", preset.destino);
-    if (preset?.tipoViaje) params.set("tipo", preset.tipoViaje);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: "Error inesperado" }));
+        throw new Error(err.error || "No pudimos enviar tu consulta");
+      }
 
-    setTimeout(() => {
+      const result = await res.json();
+
+      const params = new URLSearchParams();
+      params.set("ref", result.ref);
+      params.set("nombre", payload.nombre);
+      if (payload.destino) params.set("destino", payload.destino);
+      if (payload.tipoViaje) params.set("tipo", payload.tipoViaje);
+
       closeModal();
       router.push(`/gracias?${params.toString()}`);
-    }, 100);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error ? err.message : "Error inesperado"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   function handleWhatsApp() {
@@ -268,13 +303,24 @@ export default function ConsultaModal() {
             </label>
           </div>
 
+          {submitError && (
+            <div className="mb-4 rounded-md border border-red/20 bg-red/5 px-4 py-3 text-sm text-red">
+              {submitError}. Probá de nuevo o escribinos por WhatsApp.
+            </div>
+          )}
+
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="submit"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-sm bg-amber px-6 py-3 text-base font-bold text-dark shadow-amber transition-all hover:brightness-105"
+              disabled={isSubmitting}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-sm bg-amber px-6 py-3 text-base font-bold text-dark shadow-amber transition-all hover:brightness-105 disabled:opacity-60"
             >
-              <Send size={18} />
-              Enviar consulta
+              {isSubmitting ? (
+                <Loader2 size={18} className="animate-spin" />
+              ) : (
+                <Send size={18} />
+              )}
+              {isSubmitting ? "Enviando..." : "Enviar consulta"}
             </button>
             <button
               type="button"
@@ -285,9 +331,6 @@ export default function ConsultaModal() {
               Continuar por WhatsApp
             </button>
           </div>
-          <p className="mt-2 text-center text-xs text-light">
-            Al enviar se abrirá tu cliente de email con la consulta pre-armada
-          </p>
         </form>
       </div>
     </div>
