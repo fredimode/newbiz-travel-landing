@@ -30,18 +30,25 @@ export default function Navbar() {
       <nav className="sticky top-0 z-50 border-b border-separator bg-bg/92 backdrop-blur-[10px]">
         <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
           <a
-            href="#"
-            className="flex items-center gap-2.5 font-heading text-[22px] text-dark"
-            aria-label="New Biz Travel — Home"
+            href="/"
+            className="flex items-center gap-2"
+            aria-label="New Biz Travel — Inicio"
           >
             <Image
               src="/logo.png"
-              alt="New Biz Travel"
-              width={36}
-              height={36}
-              className="block"
+              alt=""
+              width={40}
+              height={40}
+              priority
             />
-            New Biz Travel
+            <Image
+              src="/logo-dark.png"
+              alt="New Biz Travel"
+              width={140}
+              height={32}
+              priority
+              className="hidden object-contain sm:block"
+            />
           </a>
 
           <ul className="hidden items-center gap-8 lg:flex">
@@ -92,14 +99,20 @@ export default function Navbar() {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="mb-4 flex items-center justify-between">
-            <span className="flex items-center gap-2.5 font-heading text-[22px] text-dark">
+            <span className="flex items-center gap-2">
               <Image
                 src="/logo.png"
-                alt="New Biz Travel"
-                width={32}
-                height={32}
+                alt=""
+                width={36}
+                height={36}
               />
-              New Biz Travel
+              <Image
+                src="/logo-dark.png"
+                alt="New Biz Travel"
+                width={120}
+                height={28}
+                className="object-contain"
+              />
             </span>
             <button
               className="grid h-10 w-10 place-items-center rounded-sm"
