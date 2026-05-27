@@ -52,11 +52,12 @@ export const destinos: Destino[] = [
     imageAlt: "Parque temático en Orlando",
   },
   {
-    id: "bariloche",
-    nombre: "Bariloche · Argentina",
-    tagline: "Aventura en la Patagonia",
-    precioDesde: 480,
-    imageUrl: "/destinos/bariloche.jpg",
-    imageAlt: "Lago y montañas en Bariloche, Patagonia",
+    id: "maragogi",
+    nombre: "Maragogi · Brasil",
+    tagline: "Aguas turquesas en el nordeste",
+    precioDesde: 600,
+    badge: "promo",
+    imageUrl: "/destinos/maragogi.jpg",
+    imageAlt: "Aguas turquesas y arena blanca en Maragogi, Brasil",
   },
 ];
