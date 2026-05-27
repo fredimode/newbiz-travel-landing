@@ -29,7 +29,7 @@ export const destinos: Destino[] = [
     tagline: "All inclusive frente al mar",
     precioDesde: 850,
     badge: "mas_vendido",
-    imageUrl: "https://placehold.co/800x600/0f766e/ffffff?text=Canc%C3%BAn",
+    imageUrl: "/destinos/cancun.jpg",
     imageAlt: "Playa de Cancún con aguas turquesas",
   },
   {
@@ -38,8 +38,7 @@ export const destinos: Destino[] = [
     tagline: "Carnaval, playa y samba",
     precioDesde: 720,
     badge: "promo",
-    imageUrl:
-      "https://placehold.co/800x600/0f766e/ffffff?text=R%C3%ADo%20de%20Janeiro",
+    imageUrl: "/destinos/rio.jpg",
     imageAlt: "Vista aérea de Río de Janeiro con el Cristo Redentor",
   },
   {
@@ -47,8 +46,7 @@ export const destinos: Destino[] = [
     nombre: "Punta Cana · Rep. Dominicana",
     tagline: "Paraíso caribeño",
     precioDesde: 990,
-    imageUrl:
-      "https://placehold.co/800x600/0f766e/ffffff?text=Punta%20Cana",
+    imageUrl: "/destinos/punta-cana.jpg",
     imageAlt: "Playa tropical en Punta Cana",
   },
   {
@@ -56,8 +54,7 @@ export const destinos: Destino[] = [
     nombre: "Madrid + Barcelona · España",
     tagline: "Lo mejor de España en 7 días",
     precioDesde: 1450,
-    imageUrl:
-      "https://placehold.co/800x600/0f766e/ffffff?text=Madrid%20%2B%20Barcelona",
+    imageUrl: "/destinos/madrid.jpg",
     imageAlt: "Vista panorámica de Madrid al atardecer",
   },
   {
@@ -65,7 +62,7 @@ export const destinos: Destino[] = [
     nombre: "Orlando · USA",
     tagline: "Mundo Disney en familia",
     precioDesde: 1380,
-    imageUrl: "https://placehold.co/800x600/0f766e/ffffff?text=Orlando",
+    imageUrl: "/destinos/orlando.jpg",
     imageAlt: "Parque temático en Orlando",
   },
   {
@@ -73,7 +70,7 @@ export const destinos: Destino[] = [
     nombre: "Bariloche · Argentina",
     tagline: "Aventura en la Patagonia",
     precioDesde: 480,
-    imageUrl: "https://placehold.co/800x600/0f766e/ffffff?text=Bariloche",
+    imageUrl: "/destinos/bariloche.jpg",
     imageAlt: "Lago y montañas en Bariloche, Patagonia",
   },
 ];
