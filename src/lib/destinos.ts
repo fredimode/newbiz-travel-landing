@@ -1,3 +1,17 @@
+/**
+ * TODO: reemplazar imageUrl placeholders por imágenes reales.
+ * El usuario va a subir 6 fotos a public/destinos/:
+ *   - public/destinos/cancun.jpg
+ *   - public/destinos/rio.jpg
+ *   - public/destinos/punta-cana.jpg
+ *   - public/destinos/madrid.jpg
+ *   - public/destinos/orlando.jpg
+ *   - public/destinos/bariloche.jpg
+ *
+ * Cuando estén, cambiar imageUrl de cada destino a:
+ *   '/destinos/cancun.jpg', '/destinos/rio.jpg', etc.
+ */
+
 export type Destino = {
   id: string;
   nombre: string;
@@ -15,8 +29,7 @@ export const destinos: Destino[] = [
     tagline: "All inclusive frente al mar",
     precioDesde: 850,
     badge: "mas_vendido",
-    imageUrl:
-      "https://images.unsplash.com/photo-1552074284-5e88ef1aef18?w=800&q=80&auto=format&fit=crop",
+    imageUrl: "https://placehold.co/800x600/0f766e/ffffff?text=Canc%C3%BAn",
     imageAlt: "Playa de Cancún con aguas turquesas",
   },
   {
@@ -26,7 +39,7 @@ export const destinos: Destino[] = [
     precioDesde: 720,
     badge: "promo",
     imageUrl:
-      "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80&auto=format&fit=crop",
+      "https://placehold.co/800x600/0f766e/ffffff?text=R%C3%ADo%20de%20Janeiro",
     imageAlt: "Vista aérea de Río de Janeiro con el Cristo Redentor",
   },
   {
@@ -35,7 +48,7 @@ export const destinos: Destino[] = [
     tagline: "Paraíso caribeño",
     precioDesde: 990,
     imageUrl:
-      "https://images.unsplash.com/photo-1602391833977-358a52198938?w=800&q=80&auto=format&fit=crop",
+      "https://placehold.co/800x600/0f766e/ffffff?text=Punta%20Cana",
     imageAlt: "Playa tropical en Punta Cana",
   },
   {
@@ -43,9 +56,8 @@ export const destinos: Destino[] = [
     nombre: "Madrid + Barcelona · España",
     tagline: "Lo mejor de España en 7 días",
     precioDesde: 1450,
-    badge: "mas_vendido",
     imageUrl:
-      "https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80&auto=format&fit=crop",
+      "https://placehold.co/800x600/0f766e/ffffff?text=Madrid%20%2B%20Barcelona",
     imageAlt: "Vista panorámica de Madrid al atardecer",
   },
   {
@@ -53,8 +65,7 @@ export const destinos: Destino[] = [
     nombre: "Orlando · USA",
     tagline: "Mundo Disney en familia",
     precioDesde: 1380,
-    imageUrl:
-      "https://images.unsplash.com/photo-1597466599360-3b9775841aec?w=800&q=80&auto=format&fit=crop",
+    imageUrl: "https://placehold.co/800x600/0f766e/ffffff?text=Orlando",
     imageAlt: "Parque temático en Orlando",
   },
   {
@@ -62,9 +73,7 @@ export const destinos: Destino[] = [
     nombre: "Bariloche · Argentina",
     tagline: "Aventura en la Patagonia",
     precioDesde: 480,
-    badge: "promo",
-    imageUrl:
-      "https://images.unsplash.com/photo-1531219432768-9f540ad97d92?w=800&q=80&auto=format&fit=crop",
+    imageUrl: "https://placehold.co/800x600/0f766e/ffffff?text=Bariloche",
     imageAlt: "Lago y montañas en Bariloche, Patagonia",
   },
 ];
