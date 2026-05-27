@@ -54,10 +54,10 @@ export default function Footer() {
                 <InstagramIcon className="h-[18px] w-[18px]" />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/NewBizTravelArgentina"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
+                aria-label="Facebook de New Biz Travel"
                 className="grid h-[38px] w-[38px] place-items-center rounded-sm bg-white/[0.08] text-white/85 transition-all hover:bg-teal hover:text-white"
               >
                 <FacebookIcon className="h-[18px] w-[18px]" />
@@ -83,7 +83,7 @@ export default function Footer() {
               <li><a href="#destinos" className="text-sm transition-colors hover:text-white">Destinos</a></li>
               <li><a href="#tipos" className="text-sm transition-colors hover:text-white">Tipos de viaje</a></li>
               <li><a href="#nosotros" className="text-sm transition-colors hover:text-white">Nosotros</a></li>
-              <li><a href="#contacto" className="text-sm transition-colors hover:text-white">Blog</a></li>
+              <li><a href="#contacto" className="text-sm transition-colors hover:text-white">Contacto</a></li>
             </ul>
           </div>
 
