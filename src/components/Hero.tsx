@@ -59,7 +59,7 @@ export default function Hero() {
             onClick={() => openModal()}
           >
             <Send size={18} />
-            Contar mi viaje
+            Quiero viajar
           </button>
 
           <a
