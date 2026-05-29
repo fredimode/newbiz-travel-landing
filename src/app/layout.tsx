@@ -36,21 +36,15 @@ export const metadata: Metadata = {
     siteName: "New Biz Travel",
     locale: "es_AR",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "New Biz Travel - Agencia de viajes",
-      },
-    ],
+    // og:image se genera automáticamente desde el archivo de convención
+    // src/app/opengraph-image.jpg (no referenciar archivos manuales aquí).
   },
   twitter: {
     card: "summary_large_image",
     title: "New Biz Travel · Diseñamos tu viaje a medida",
     description:
       "Agencia de viajes en Buenos Aires. Asesoramiento personalizado, mejores precios y acompañamiento durante todo tu viaje.",
-    images: ["/og-image.png"],
+    // twitter:image cae automáticamente al og:image del archivo de convención.
   },
   other: {
     "theme-color": "#0d9488",
