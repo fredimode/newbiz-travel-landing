@@ -23,11 +23,6 @@ export const metadata: Metadata = {
   title: "New Biz Travel · Diseñamos tu viaje a medida",
   description:
     "Agencia de viajes en Buenos Aires. Asesoramiento personalizado, mejores precios y acompañamiento durante todo tu viaje. Legajo EVyT 14764.",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: { index: false, follow: false },
-  },
   openGraph: {
     title: "New Biz Travel · Diseñamos tu viaje a medida",
     description:
